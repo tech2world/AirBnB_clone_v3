@@ -11,24 +11,24 @@ from models import storage
 from models.user import User
 
 
-@app_views.route('/status')
+@app_views.route('/status', strict_slashes=False)
 def get_status():
     """get the status of the API"""
     return jsonify({"status": "OK"})
 
 
-# @app_views.route('/stats')
-# def get_stats():
-#     """gets number of object by type"""
-#     objects = {
-#         'amenities': Amenity,
-#         'cities': City,
-#         'reviews': Review,
-#         'states': State,
-#         'users': User
-#     }
+@app_views.route('/stats', strict_slashes=False)
+def get_stats():
+    """gets number of object by type"""
+    objects = {
+        'amenities': Amenity,
+        'cities': City,
+        'reviews': Review,
+        'states': State,
+        'users': User
+    }
 
-#     results = {}
-#     for key, value in objects.items():
-#         results[key] = storage.count(value)
-#     return jsonify(results)
+    results = {}
+    for key, value in objects.items():
+        results[key] = storage.count(value)
+    return jsonify(results)
