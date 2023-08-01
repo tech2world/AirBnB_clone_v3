@@ -10,10 +10,12 @@ from models.state import State
 from models import storage
 from models.user import User
 
+
 @app_views.route('/status')
 def get_status():
     """get the status of the API"""
     return jsonify(status='OK')
+
 
 @app_views.route('/stats')
 def get_stats():
@@ -25,9 +27,6 @@ def get_stats():
         'states': State,
         'users': User
     }
-    results = []
-    for key in objects:
-        count = storage.count(objects[key])
-        results.append({'name': key, 'count': count})
-
-    return jsonify(results)
+    for key, value in objects.items():
+        objects[key] = storage.count(value)
+    return jsonify(objects)
