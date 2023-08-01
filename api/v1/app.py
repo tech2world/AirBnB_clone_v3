@@ -2,7 +2,7 @@
 """Flask API config file"""
 
 from api.v1.views import app_views
-from flask import Flask, make_response, jsonify
+from flask import Flask, jsonify
 from models import storage
 import os
 
@@ -25,16 +25,16 @@ def error_404(error):
     return jsonify(error='Not found'), 404
 
 
-@app.errorhandler(400)
-def error_400(error):
-    """handles http 400 error code"""
-    err = 'BAd request'
-    if isinstance(error, Exception) and hasattr(error, 'description'):
-        err = error.description
-    return jsonify(error=err), 400
+# @app.errorhandler(400)
+# def error_400(error):
+#     """handles http 400 error code"""
+#     err = 'Bad request'
+#     if isinstance(error, Exception) and hasattr(error, 'description'):
+#         err = error.description
+#     return make_response(jsonify(error=err), 400)
 
 
 if __name__ == '__main__':
     host = os.getenv("HBNB_API_HOST", "0.0.0.0")
     port = os.getenv("HBNB_API_PORT", "5000")
-    app.run(host=host, port=port)
+    app.run(host=host, port=port, threaded=True)
