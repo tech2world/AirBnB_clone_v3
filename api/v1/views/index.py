@@ -14,7 +14,7 @@ from models.user import User
 @app_views.route('/status')
 def get_status():
     """get the status of the API"""
-    return jsonify(status='OK')
+    return jsonify({"status": "OK"})
 
 
 @app_views.route('/stats')
@@ -27,6 +27,12 @@ def get_stats():
         'states': State,
         'users': User
     }
+
+    results = {}
     for key, value in objects.items():
-        objects[key] = storage.count(value)
-    return jsonify(objects)
+        results[key] = storage.count(value)
+    return jsonify(results)
+
+
+if __name__ == "__main__":
+    pass

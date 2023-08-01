@@ -22,16 +22,16 @@ def teardown_app(exception):
 @app.errorhandler(404)
 def error_404(error):
     """handles 404 error"""
-    return jsonify(error='Not found'), 404
+    return make_response(jsonify(error='Not found'), 404)
 
 
 @app.errorhandler(400)
 def error_400(error):
     """handles http 400 error code"""
-    err = 'BAd request'
+    err = 'Bad request'
     if isinstance(error, Exception) and hasattr(error, 'description'):
         err = error.description
-    return jsonify(error=err), 400
+    return make_response(jsonify(error=err), 400)
 
 
 if __name__ == '__main__':
