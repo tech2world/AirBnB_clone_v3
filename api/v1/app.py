@@ -19,19 +19,19 @@ def teardown_app(exception):
     storage.close
 
 
-@app.errorhandler(404)
-def error_404(error):
-    """handles 404 error"""
-    return make_response(jsonify(error='Not found'), 404)
+# @app.errorhandler(404)
+# def error_404(error):
+#     """handles 404 error"""
+#     return make_response(jsonify(error='Not found'), 404)
 
 
-@app.errorhandler(400)
-def error_400(error):
-    """handles http 400 error code"""
-    err = 'Bad request'
-    if isinstance(error, Exception) and hasattr(error, 'description'):
-        err = error.description
-    return make_response(jsonify(error=err), 400)
+# @app.errorhandler(400)
+# def error_400(error):
+#     """handles http 400 error code"""
+#     err = 'Bad request'
+#     if isinstance(error, Exception) and hasattr(error, 'description'):
+#         err = error.description
+#     return make_response(jsonify(error=err), 400)
 
 
 if __name__ == '__main__':
