@@ -33,6 +33,3 @@ def get_stats():
         results[key] = storage.count(value)
     return jsonify(results)
 
-
-if __name__ == "__main__":
-    pass
